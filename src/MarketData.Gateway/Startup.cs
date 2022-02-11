@@ -1,10 +1,6 @@
 using System;
 using System.IO;
 using System.Reflection;
-using Jaeger;
-using Jaeger.Reporters;
-using Jaeger.Samplers;
-using Jaeger.Senders.Thrift;
 using MarketData.Gateway.HealthChecks;
 using MarketData.Gateway.Options;
 using MarketData.Gateway.Services;
@@ -18,9 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using OpenTracing;
 using Prometheus;
 
 namespace MarketData.Gateway
@@ -50,27 +44,7 @@ namespace MarketData.Gateway
             services.Configure<ValidationClientOptions>(Configuration);
             services.AddSingleton<IValidationClient, ValidationClient>();
             services.AddSingleton<IGatewayService, GatewayService>();
-
-            // Register Jaeger
-            services.AddSingleton<ITracer>(serviceProvider =>
-            {
-                var serviceName = serviceProvider.GetRequiredService<IWebHostEnvironment>().ApplicationName;
-                var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-                ISampler sampler = new ConstSampler(true);
-
-                var host = Environment.GetEnvironmentVariable("JAEGER_AGENT_HOST") ?? "localhost";
-
-                var remoteReporter = new RemoteReporter.Builder()
-                    .WithLoggerFactory(loggerFactory)
-                    .WithSender(new UdpSender(host, 6831, 0))
-                    .Build();
-
-                return new Tracer.Builder(serviceName)
-                    .WithReporter(remoteReporter)
-                    .WithLoggerFactory(loggerFactory)
-                    .WithSampler(sampler)
-                    .Build();
-            });
+            services.AddOpenTracing();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
