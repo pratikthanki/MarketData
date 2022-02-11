@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MarketData.Gateway.Extensions;
 using MarketData.Gateway.Models;
 using MarketData.Gateway.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
@@ -61,7 +62,7 @@ namespace MarketData.Gateway.Controllers
                 return BadRequest("Unrecognized Market Data Type provided");
             }
 
-            return Ok(validationResult);
+            return StatusCode(StatusCodes.Status201Created, validationResult);
         }
 
         /// <summary>
