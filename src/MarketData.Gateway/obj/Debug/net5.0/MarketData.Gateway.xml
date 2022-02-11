@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MarketData.Gateway</name>
+    </assembly>
+    <members>
+        <member name="T:MarketData.Gateway.Controllers.GatewayController">
+            <summary>
+            Market Data Gateway
+            </summary>
+        </member>
+        <member name="M:MarketData.Gateway.Controllers.GatewayController.ProcessAsync(MarketData.Gateway.Models.ContributionRequest,System.Threading.CancellationToken)">
+            <summary>
+            Process a market data contribution through the gateway and receive
+            either a successful or unsuccessful response.
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MarketData.Gateway.Controllers.GatewayController.RetrieveAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Retrieve the details of a previously contributed market data.
+            </summary>
+            <param name="uniqueId"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

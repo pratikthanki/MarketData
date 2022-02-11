@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData.Gateway", "MarketData.Gateway\MarketData.Gateway.csproj", "{9ED50E1E-10B7-491D-BF40-3B52A166FA93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketData.Gateway.Tests", "MarketData.Gateway.Tests\MarketData.Gateway.Tests.csproj", "{CAC77E55-49E7-46CE-955D-2025268E60C1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9ED50E1E-10B7-491D-BF40-3B52A166FA93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ED50E1E-10B7-491D-BF40-3B52A166FA93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ED50E1E-10B7-491D-BF40-3B52A166FA93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ED50E1E-10B7-491D-BF40-3B52A166FA93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAC77E55-49E7-46CE-955D-2025268E60C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAC77E55-49E7-46CE-955D-2025268E60C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAC77E55-49E7-46CE-955D-2025268E60C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAC77E55-49E7-46CE-955D-2025268E60C1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
