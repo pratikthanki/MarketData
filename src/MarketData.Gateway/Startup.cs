@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using MarketData.Gateway.HealthChecks;
 using MarketData.Gateway.Options;
 using MarketData.Gateway.Services;
@@ -46,7 +47,13 @@ namespace MarketData.Gateway
             services.AddSingleton<IGatewayService, GatewayService>();
             services.AddOpenTracing();
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddJsonOptions(opts =>
+                {
+                    opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    opts.JsonSerializerOptions.IgnoreNullValues = true;
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",
