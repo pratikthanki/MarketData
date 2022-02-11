@@ -4,24 +4,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NUnit.Framework;
 
 namespace MarketData.Gateway.Tests
 {
     public abstract class TestBase : IDisposable
     {
-        private readonly HttpClient _client;
+        private readonly WebApplicationFactory<Startup> _factory = new();
+        private HttpClient _client;
 
-        protected TestBase()
+        [SetUp]
+        protected void SetUp()
         {
-            var factory = new WebApplicationFactory<Startup>();
-            _client = factory.WithWebHostBuilder(builder =>
+            _client = _factory.WithWebHostBuilder(builder =>
             {
                 builder
                     .ConfigureAppConfiguration(ConfigureAppConfiguration)
                     .ConfigureTestServices(ConfigureTestServices);
-
             }).CreateClient();
         }
 
@@ -45,6 +47,7 @@ namespace MarketData.Gateway.Tests
 
         public void Dispose()
         {
+            _factory?.Dispose();
             _client?.Dispose();
         }
     }
